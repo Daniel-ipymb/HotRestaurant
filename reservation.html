@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1> Hot Restaurant </h1>
+  <h2>Make your reservation</h2>
+  <button>View Tables</button>
+  <button>Home</button>
+  <form id="makeReservation">
+    <label for=""></label>
+    <input type="text" name="" id="name">
+    <input type="text" name="" id="phoneNumber">
+    <input type="text" name="" id="email">
+    <input type="text" name="" id="uniqueId">
+    <button type="submit" id="submit-btn">submit</button>
+  </form>
+  <script>
+    let reservationForm = document.getElementById('makeReservation');
+    const submitBtn = document.getElementById('submitBtn')
+    
+    submitBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      let charName = document.getElementById('name').value.trim();
+      let charNumber = document.getElementById('phoneNumber').value.trim();
+      let charEmail = document.getElementById('email').value.trim();
+      let charId = document.getElementById('uniqueId').value.trim();
+
+      let makeReservation = {
+        name: charName,
+        phoneNumber: parseInt(charNumber),
+        email: charEmail,
+        userId: parseInt(charId)
+      };
+
+      fetch('/api/reservations', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(makeReservation),
+      })
+      .then((response) => response.json())
+    })
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    const makeReservation = (e) => {
+      e.preventDefault()
+      console.log('hello')
+      fetch('/api/reservations', {
+        method: 'Post',
+        body: JSON.stringify({
+          name: document.getElementById('name').value.trim(),
+          phoneNumber: document.getElementById('phoneNumber').value.trim(),
+          email: document.getElementById('email').value.trim(),
+          uniqueId: document.getElementById('uniqueId').value.trim()
+        })
+      })
+      . then(res => console.log(res)) 
+    }
+
+    reservationForm.onsubmit = makeReservation
+
+    
+  </script>
+</body>
+</html>
